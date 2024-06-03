@@ -1,0 +1,23 @@
+{
+  "name": "thermostat",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jtsalisbury/thermostat.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jtsalisbury/thermostat/issues"
+  },
+  "homepage": "https://github.com/jtsalisbury/thermostat#readme",
+  "dependencies": {
+    "i2c-bus": "^5.2.3",
+    "si7021-sensor": "0.0.7"
+  }
+}
