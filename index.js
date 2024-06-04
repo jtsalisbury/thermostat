@@ -4,11 +4,8 @@ const ADDR = 0x40;
 const TEMP_REG = 0xE3;
 
 const toCelsius = rawData => {
-    rawData = (rawData >> 8) + ((rawData & 0xff) << 8);
-    let celsius = (rawData & 0x0fff) / 16;
-    if (rawData & 0x1000) {
-      celsius -= 256;
-    }
+    let temp = (rawData >> 8) * 256 + (rawData << 8);
+    let celsius = ((175.72 * temp) / 65536.0) - 46.85
     return celsius;
 };
 
