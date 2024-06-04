@@ -24,7 +24,7 @@ export const readTemperature = () => {
 
     i2c1.closeSync();
 
-    return rawData;
+    return temp;
 }
 const data = readTemperature();
 
