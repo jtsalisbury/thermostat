@@ -17,7 +17,6 @@
   },
   "homepage": "https://github.com/jtsalisbury/thermostat#readme",
   "dependencies": {
-    "i2c-bus": "^5.2.3",
-    "si7021-sensor": "0.0.7"
+    "i2c-bus": "^5.2.3"
   }
 }
