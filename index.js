@@ -1,7 +1,7 @@
 import i2c from 'i2c-bus';
 
 const ADDR = 0x40;
-const TEMP_REG = 0xF3;
+const TEMP_REG = 0xE3;
 
 export const readTemperature = () => {
     const i2c1 = i2c.openSync(1);
