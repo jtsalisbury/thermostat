@@ -12,10 +12,11 @@ const toCelsius = (buf) => {
 export const readTemperature = () => {
     const i2c1 = i2c.openSync(1);
     const rbuf = Buffer.alloc(2);
+    const wbuf = Buffer.from([TEMP_REG]);
 
-    i2c1.i2cWriteSync(Buffer.from([TEMP_REG]));
-
+    i2c1.i2cWriteSync(ADDR, wbuf.length, wbuf);
     i2c1.i2cReadSync(ADDR, rbuf.length, rbuf);
+    
     console.log(rbuf);
 
     const temp = toCelsius(rawData);
