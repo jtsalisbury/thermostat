@@ -16,10 +16,10 @@ export const readTemperature = () => {
 
     i2c1.i2cWriteSync(ADDR, wbuf.length, wbuf);
     i2c1.i2cReadSync(ADDR, rbuf.length, rbuf);
-    
+
     console.log(rbuf);
 
-    const temp = toCelsius(rawData);
+    const temp = toCelsius(rbuf);
     console.log(temp);
 
     i2c1.closeSync();
