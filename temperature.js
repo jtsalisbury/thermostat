@@ -1,9 +1,10 @@
-import i2c from 'i2c-bus';
+const isLinux = process.platform == 'linux';
+
+const i2c = isLinux && require('i2c-bus');
 
 const ADDR = 0x40;
 const TEMP_REG = 0xE3;
 
-const isLinux = (process.platform === 'linux');
 
 const toCelsius = (buf) => {
     let data16 = (buf[0] << 8) | (buf[1] & 0xFC);
@@ -12,6 +13,10 @@ const toCelsius = (buf) => {
 };
 
 export let readTemperature = () => {
+    if (!isLinux) {
+        return 24;
+    }
+
     const i2c1 = i2c.openSync(1);
     const rbuf = Buffer.alloc(2);
     const wbuf = Buffer.from([TEMP_REG]);
