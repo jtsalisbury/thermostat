@@ -35,5 +35,3 @@ const disableThermostat = () => {
 }
 
 enableThermostat();
-
-console.log(data);
