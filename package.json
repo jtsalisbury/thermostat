@@ -1,5 +1,5 @@
 {
-  "name": "thermostat",
+  "name": "train",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -18,6 +18,15 @@
   },
   "homepage": "https://github.com/jtsalisbury/thermostat#readme",
   "dependencies": {
-    "i2c-bus": "^5.2.3"
+    "http": "0.0.1-security",
+    "i2c-bus": "^5.2.3",
+    "node-fetch": "^3.3.2",
+    "rpi-led-matrix": "^1.15.0",
+    "socket.io": "^4.7.5",
+    "tslog": "^4.9.3"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.2",
+    "typescript": "^5.4.5"
   }
 }
