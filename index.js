@@ -12,22 +12,22 @@ const matrix = null;
 const setupMatrix = () => {
 
 
-matrix = new LedMatrix(
-    {
-        ...LedMatrix.defaultMatrixOptions,
-        rows: 32,
-        cols: 64,
-        chainLength: 2,
-        hardwareMapping: GpioMapping.AdafruitHatPwm,
-        pixelMapperConfig: LedMatrixUtils.encodeMappers({
-            type: PixelMapperType.U,
-        }),
-    },
-    {
-        ...LedMatrix.defaultRuntimeOptions,
-        gpioSlowdown: 1,
-    }
-);
+    matrix = new LedMatrix(
+        {
+            ...(LedMatrix.defaultMatrixOptions()),
+            rows: 32,
+            cols: 64,
+            chainLength: 2,
+            hardwareMapping: GpioMapping.regular,
+            pixelMapperConfig: LedMatrixUtils.encodeMappers({
+                type: PixelMapperType.U,
+            }),
+        },
+        {
+            ...(LedMatrix.defaultRuntimeOptions()),
+            gpioSlowdown: 0,
+        }
+    );
 }
 
 const getArrivalData = async () => {
@@ -44,8 +44,6 @@ const getArrivalData = async () => {
     }
 }
 
-
-
 const renderData = async () => {
     const data = await getArrivalData();
 
@@ -56,7 +54,7 @@ const renderData = async () => {
     if (data.trains == null || data.trains.length === 0) {
         showNoTrains();
     } else {
-        
+
         if (data.trains.length > 3) {
             renderArrivalTimes(data.trains.slice(0, 3));
         } else {
@@ -80,13 +78,33 @@ const showNoTrains = () => {
 }
 
 const renderArrivalTimes = (trains) => {
-    console.log(trains);
+    matrix
+        .clear() // clear the display
+        .brightness(100) // set the panel brightness to 100%
+        .fgColor(0x000000) // set the active color to blue
+        .fill() // color the entire diplay blue
+        .fgColor(getColor(train[0])) // set the active color to yellow
+        // draw a yellow circle around the display
+        .drawCircle(matrix.width() / 2, matrix.height() / 2, matrix.width() / 2 - 1)
+        // draw a yellow rectangle
+        .drawRect(
+            matrix.width() / 4,
+            matrix.height() / 4,
+            matrix.width() / 2,
+            matrix.height() / 2
+        )
+        // sets the active color to red
+        .fgColor({ r: 255, g: 0, b: 0 })
+        // draw two diagonal red lines connecting the corners
+        .drawLine(0, 0, matrix.width(), matrix.height())
+        .drawLine(matrix.width() - 1, 0, 0, matrix.height() - 1)
+        .sync();
 }
 
 
 const start = () => {
-    //setupMatrix();
-    
+    setupMatrix();
+
     setInterval(() => {
         renderData();
     }, 4000);
