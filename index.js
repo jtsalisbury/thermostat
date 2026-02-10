@@ -77,16 +77,17 @@ const showNoTrains = () => {
 const renderArrivalTimes = (trains) => {
     matrix.clear().brightness(100).font(font);
 
-    let i = 0;
-    for (let train of trains) {
+    matrix
+    .fgColor(getColor(trains[0]))
+    .drawText(trains[0].train_type + " - " + train[0].which_is_in + " min", 0, 1);
 
-        matrix
-            .fgColor(getColor(train))
-            .drawText(train.train_type + " - " + train.which_is_in + " min", 0, (5 * i) + 3);
-        
-        i++;
-            
-    }
+    matrix
+    .fgColor(getColor(trains[1]))
+    .drawText(train[1].train_type + " - " + train[1].which_is_in + " min", 0, 10);
+
+    matrix
+            .fgColor(getColor(trains[2]))
+            .drawText(trains[2].train_type + " - " + trains[2].which_is_in + " min", 0, 18);
 
     matrix.sync();
        
