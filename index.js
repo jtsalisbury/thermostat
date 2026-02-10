@@ -26,6 +26,8 @@ const matrix = new LedMatrix(matrixOptions, runtimeOptions);
 const font = new Font("default", "./5x7.bdf");
 
 const getArrivalData = async () => {
+    console.log("Getting new arrival data...");
+
     try {
         const response = await fetch('https://train-arrivals-6c5c64469c48.herokuapp.com/v1/arrivals');
         const data = await response.json();
@@ -74,14 +76,22 @@ const showNoTrains = () => {
 
 const renderArrivalTimes = (trains) => {
     console.log(trains[0]);
-        
+
+
+    matrix.clear().brightness(100).font(font);
+
+    const i = 0;
+    for (let train of trains) {
         matrix
-      .clear()
-      .brightness(100)
-      .font(font)
-      .fgColor(getColor(trains[0]))
-      .drawText(trains[0].train_type + " - " + trains[0].which_is_in + " min", 0, 0)
-      .sync();
+            .fgColor(getColor(train))
+            .drawText(train.train_type + " - " + train.which_is_in + " min", 0, 5 * i + 1);
+        
+        i++;
+            
+    }
+
+    matrix.sync();
+       
 }
 
 
