@@ -4,6 +4,8 @@ import fetch from 'node-fetch';
 
 import { LedMatrix } from 'rpi-led-matrix';
 
+const wait = (t) => new Promise(ok => setTimeout(ok, t));
+
 (async () => {
   try {
     // Configuration for your specific matrix (adjust as needed)
@@ -30,7 +32,7 @@ import { LedMatrix } from 'rpi-led-matrix';
         .fgColor(0xff0000)
         .drawLine(0, matrix.height() / 2, matrix.width(), matrix.height() / 2)
         .sync();
-        
+
         await wait(9999999);
 
   } catch (error) {
