@@ -2,7 +2,7 @@
 
 import fetch from 'node-fetch';
 
-import { LedMatrix } from 'rpi-led-matrix';
+import { Font, LedMatrix } from 'rpi-led-matrix';
 
 const wait = (t) => new Promise(ok => setTimeout(ok, t));
 
@@ -23,9 +23,7 @@ const runtimeOptions = {
 
 const matrix = new LedMatrix(matrixOptions, runtimeOptions);
 
-
-    
-
+const font = new Font("default", "./5x7.bdf");
 
 const getArrivalData = async () => {
     try {
@@ -75,11 +73,12 @@ const showNoTrains = () => {
 }
 
 const renderArrivalTimes = (trains) => {
-    
+    console.log(trains[0]);
         
         matrix
       .clear()
       .brightness(100)
+      .font(font)
       .fgColor(getColor(trains[0]))
       .drawText(trains[0].train_type + " - " + trains[0].which_is_in + " min", 0, 0)
       .sync();
