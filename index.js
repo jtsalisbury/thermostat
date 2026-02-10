@@ -14,6 +14,7 @@ const wait = (t) => new Promise(ok => setTimeout(ok, t));
         rows: 32,
         cols: 64,
         chainLength: 2,
+        parallel: 1,
         hardwareMapping: 'regular', // or 'regular'
     };
 
