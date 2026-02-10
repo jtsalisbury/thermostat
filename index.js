@@ -10,7 +10,7 @@ import { LedMatrix } from 'rpi-led-matrix';
     const matrixOptions = {
         ...LedMatrix.defaultMatrixOptions(),
         rows: 32,
-        cols: 32,
+        cols: 128,
         chainLength: 1,
         hardwareMapping: 'regular', // or 'regular'
     };
@@ -18,6 +18,7 @@ import { LedMatrix } from 'rpi-led-matrix';
     const runtimeOptions = {
         ...LedMatrix.defaultRuntimeOptions(),
         gpioSlowdown: 2, // Required for slower Pis
+        disableHardwarePulsing: true
     };
     
     const matrix = new LedMatrix(matrixOptions, runtimeOptions);
