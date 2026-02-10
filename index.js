@@ -35,7 +35,7 @@ const runtimeOptions = {
 (async () => {
   try {
     
-    const matrix = LedMatrix(matrixOptions, runtimeOptions);
+    const matrix = new LedMatrix(matrixOptions, runtimeOptions);
 
     // Set an initial display color
     matrix.Fill(255, 0, 0); // Fills the matrix with Red
