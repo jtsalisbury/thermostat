@@ -13,18 +13,19 @@ const wait = (t) => new Promise(ok => setTimeout(ok, t));
         ...LedMatrix.defaultMatrixOptions(),
         rows: 32,
         cols: 128,
-        chainLength: 2,
+        chainLength: 1,
         hardwareMapping: 'regular', // or 'regular'
     };
 
     const runtimeOptions = {
         ...LedMatrix.defaultRuntimeOptions(),
+        gpioSlowdown: 2, // Required for slower Pis
     };
     
     const matrix = new LedMatrix(matrixOptions, runtimeOptions);
     matrix
     .clear() // clear the display
-    .brightness(100) // set the panel brightness to 100%
+    .brightness(25) // set the panel brightness to 100%
     .fgColor(0x0000ff) // set the active color to blue
     .fill() // color the entire diplay blue
     .fgColor(0xffff00) // set the active color to yellow
