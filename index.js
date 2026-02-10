@@ -14,7 +14,7 @@ const wait = (t) => new Promise(ok => setTimeout(ok, t));
         rows: 64,
         cols: 128,
         chainLength: 2,
-        hardwareMapping: 'classic-pi1', // or 'regular'
+        hardwareMapping: 'regular', // or 'regular'
     };
 
     const runtimeOptions = {
