@@ -1,36 +1,73 @@
-import {
-    LedMatrix,
-    GpioMapping,
-    LedMatrixUtils,
-    PixelMapperType,
-} from 'rpi-led-matrix';
+
 
 import fetch from 'node-fetch';
 
-let matrix = null;
+import { LedMatrix } from 'rpi-led-matrix';
 
-const setupMatrix = () => {
+console.log(LedMatrix.defaultMatrixOptions);
+
+const matrixOptions = {
+    rows: 32,
+    cols: 64,
+    chainLength: 1,
+    parallel: 1,
+    showRefreshRate: false,
+    hardwareMapping: 'regular', // or 'adafruit-hat'
+    pwmbits: 11,
+    brightness: 100,
+    disableHardwarePulsing: false,
+    rowAddressType: 0,
+    multiplexing: 0,
+    luminanceSteps: 255,
+    inverseColors: false,
+    ledRgbSequence: 'RGB',
+    pixelMapperConfig: '',
+    panelType: ''
+};
+
+const runtimeOptions = {
+    gpioSlowdown: 2,
+    daemon: 0, // 0 for Off, 1 for On
+    dropPrivileges: 1,
+    doGpioInit: true
+};
+
+(async () => {
+  try {
+    
+    const matrix = new LedMatrix(matrixOptions, runtimeOptions);
+
+    // Set an initial display color
+    matrix.Fill(255, 0, 0); // Fills the matrix with Red
+    matrix.update(); // Update the display to show the color
+
+    console.log('Matrix filled with red. Waiting 3 seconds...');
+    await new Promise(resolve => setTimeout(resolve, 3000));
+
+    // Fill with Green
+    matrix.Fill(0, 255, 0);
+    matrix.update();
+    console.log('Matrix filled with green. Waiting 3 seconds...');
+    await new Promise(resolve => setTimeout(resolve, 3000));
+
+    // Fill with Blue
+    matrix.Fill(0, 0, 255);
+    matrix.update();
+    console.log('Matrix filled with blue. Waiting 3 seconds...');
+    await new Promise(resolve => setTimeout(resolve, 3000));
+
+    // Clear the screen
+    matrix.Clear();
+    matrix.update();
+    console.log('Matrix cleared.');
+
+  } catch (error) {
+    console.error(error);
+  }
+})();
 
 
-    matrix = new LedMatrix(
-        {
-            ...(LedMatrix.defaultMatrixOptions()),
-            rows: 32,
-            cols: 64,
-            chainLength: 2,
-            hardwareMapping: GpioMapping.regular,
-            pixelMapperConfig: LedMatrixUtils.encodeMappers({
-                type: PixelMapperType.U,
-            }),
-        },
-        {
-            ...(LedMatrix.defaultRuntimeOptions()),
-            gpioSlowdown: 0,
-        }
-    );
-}
-
-const getArrivalData = async () => {
+/*const getArrivalData = async () => {
     try {
         const response = await fetch('https://train-arrivals-6c5c64469c48.herokuapp.com/v1/arrivals');
         const data = await response.json();
@@ -113,4 +150,4 @@ const start = () => {
 
 (() => {
     start();
-})();
+})();*/
