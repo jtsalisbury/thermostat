@@ -19,7 +19,6 @@ const wait = (t) => new Promise(ok => setTimeout(ok, t));
 
     const runtimeOptions = {
         ...LedMatrix.defaultRuntimeOptions(),
-        gpioSlowdown: 2, // Required for slower Pis
     };
     
     const matrix = new LedMatrix(matrixOptions, runtimeOptions);
