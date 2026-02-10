@@ -22,30 +22,15 @@ import { LedMatrix } from 'rpi-led-matrix';
     };
     
     const matrix = new LedMatrix(matrixOptions, runtimeOptions);
+    matrix
+    .clear()
+    .brightness(100)
+    .fgColor(0x0000ff)
+    .drawRect(0, 0, matrix.width() - 1, matrix.height() - 1)
+    .fgColor(0xff0000)
+    .drawLine(0, matrix.height() / 2, matrix.width(), matrix.height() / 2)
+    .sync();
 
-    // Set an initial display color
-    matrix.Fill(255, 0, 0); // Fills the matrix with Red
-    matrix.update(); // Update the display to show the color
-
-    console.log('Matrix filled with red. Waiting 3 seconds...');
-    await new Promise(resolve => setTimeout(resolve, 3000));
-
-    // Fill with Green
-    matrix.Fill(0, 255, 0);
-    matrix.update();
-    console.log('Matrix filled with green. Waiting 3 seconds...');
-    await new Promise(resolve => setTimeout(resolve, 3000));
-
-    // Fill with Blue
-    matrix.Fill(0, 0, 255);
-    matrix.update();
-    console.log('Matrix filled with blue. Waiting 3 seconds...');
-    await new Promise(resolve => setTimeout(resolve, 3000));
-
-    // Clear the screen
-    matrix.Clear();
-    matrix.update();
-    console.log('Matrix cleared.');
 
   } catch (error) {
     console.error(error);
