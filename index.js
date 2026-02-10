@@ -23,14 +23,15 @@ import { LedMatrix } from 'rpi-led-matrix';
     
     const matrix = new LedMatrix(matrixOptions, runtimeOptions);
     matrix
-    .clear()
-    .brightness(100)
-    .fgColor(0x0000ff)
-    .drawRect(0, 0, matrix.width() - 1, matrix.height() - 1)
-    .fgColor(0xff0000)
-    .drawLine(0, matrix.height() / 2, matrix.width(), matrix.height() / 2)
-    .sync();
-
+        .clear()
+        .brightness(100)
+        .fgColor(0x0000ff)
+        .drawRect(0, 0, matrix.width() - 1, matrix.height() - 1)
+        .fgColor(0xff0000)
+        .drawLine(0, matrix.height() / 2, matrix.width(), matrix.height() / 2)
+        .sync();
+        
+        await wait(9999999);
 
   } catch (error) {
     console.error(error);
