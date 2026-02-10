@@ -6,51 +6,28 @@ import { LedMatrix } from 'rpi-led-matrix';
 
 const wait = (t) => new Promise(ok => setTimeout(ok, t));
 
-(async () => {
-  try {
-    // Configuration for your specific matrix (adjust as needed)
-    const matrixOptions = {
-        ...LedMatrix.defaultMatrixOptions(),
-        rows: 32,
-        cols: 64,
-        chainLength: 2,
-        parallel: 1,
-        hardwareMapping: 'regular', // or 'regular'
-    };
+// Configuration for your specific matrix (adjust as needed)
+const matrixOptions = {
+    ...LedMatrix.defaultMatrixOptions(),
+    rows: 32,
+    cols: 64,
+    chainLength: 2,
+    parallel: 1,
+    hardwareMapping: 'regular', // or 'regular'
+};
 
-    const runtimeOptions = {
-        ...LedMatrix.defaultRuntimeOptions(),
-        gpioSlowdown: 0, // Required for slower Pis
-    };
+const runtimeOptions = {
+    ...LedMatrix.defaultRuntimeOptions(),
+    gpioSlowdown: 2, // Required for slower Pis
+};
+
+const matrix = new LedMatrix(matrixOptions, runtimeOptions);
+
+
     
-    const matrix = new LedMatrix(matrixOptions, runtimeOptions);
-
-    console.log("coloring..");
-
-    console.log('available pixel mappers: ', matrix.getAvailablePixelMappers());
-    console.log(`current mapper config: ${matrixOptions.pixelMapperConfig}`);
-    console.log('height: ', matrix.height());
-    console.log('width: ', matrix.width());
-    matrix
-      .clear()
-      .brightness(100)
-      .fgColor(0x0000ff)
-      .drawRect(0, 0, matrix.width() - 1, matrix.height() - 1)
-      .fgColor(0xff0000)
-      .drawLine(0, matrix.height() / 2, matrix.width(), matrix.height() / 2)
-      .sync();
-      
-    console.log("colored");
-
-        await wait(9999999);
-
-  } catch (error) {
-    console.error(error);
-  }
-})();
 
 
-/*const getArrivalData = async () => {
+const getArrivalData = async () => {
     try {
         const response = await fetch('https://train-arrivals-6c5c64469c48.herokuapp.com/v1/arrivals');
         const data = await response.json();
@@ -98,27 +75,14 @@ const showNoTrains = () => {
 }
 
 const renderArrivalTimes = (trains) => {
-    matrix
-        .clear() // clear the display
-        .brightness(100) // set the panel brightness to 100%
-        .fgColor(0x000000) // set the active color to blue
-        .fill() // color the entire diplay blue
-        .fgColor(getColor(train[0])) // set the active color to yellow
-        // draw a yellow circle around the display
-        .drawCircle(matrix.width() / 2, matrix.height() / 2, matrix.width() / 2 - 1)
-        // draw a yellow rectangle
-        .drawRect(
-            matrix.width() / 4,
-            matrix.height() / 4,
-            matrix.width() / 2,
-            matrix.height() / 2
-        )
-        // sets the active color to red
-        .fgColor({ r: 255, g: 0, b: 0 })
-        // draw two diagonal red lines connecting the corners
-        .drawLine(0, 0, matrix.width(), matrix.height())
-        .drawLine(matrix.width() - 1, 0, 0, matrix.height() - 1)
-        .sync();
+    
+        
+        matrix
+      .clear()
+      .brightness(100)
+      .fgColor(getColor(trains[0]))
+      .drawText(trains[0].train_type + " - " + trains[0].which_is_in + " min", 0, 0)
+      .sync();
 }
 
 
@@ -133,4 +97,4 @@ const start = () => {
 
 (() => {
     start();
-})();*/
+})();
