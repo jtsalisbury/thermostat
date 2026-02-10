@@ -25,7 +25,7 @@ const wait = (t) => new Promise(ok => setTimeout(ok, t));
     const matrix = new LedMatrix(matrixOptions, runtimeOptions);
     matrix
     .clear() // clear the display
-    .brightness(25) // set the panel brightness to 100%
+    .brightness(100) // set the panel brightness to 100%
     .fgColor(0x0000ff) // set the active color to blue
     .fill() // color the entire diplay blue
     .fgColor(0xffff00) // set the active color to yellow
