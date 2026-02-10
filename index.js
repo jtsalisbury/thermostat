@@ -24,6 +24,9 @@ const wait = (t) => new Promise(ok => setTimeout(ok, t));
     };
     
     const matrix = new LedMatrix(matrixOptions, runtimeOptions);
+
+    console.log("coloring..");
+
     matrix
     .clear() // clear the display
     .brightness(100) // set the panel brightness to 100%
@@ -48,6 +51,8 @@ const wait = (t) => new Promise(ok => setTimeout(ok, t));
     // draw two diagonal red lines connecting the corners
     .drawLine(0, 0, matrix.width(), matrix.height())
     .drawLine(matrix.width() - 1, 0, 0, matrix.height() - 1);
+
+    console.log("colored");
 
         await wait(9999999);
 
