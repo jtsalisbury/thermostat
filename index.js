@@ -7,14 +7,14 @@ import {
 
 import fetch from 'node-fetch';
 
-const matrix = null;
+let matrix = null;
 
 const setupMatrix = () => {
 
 
     matrix = new LedMatrix(
         {
-            ...(LedMatrix.defaultMatrixOptions()),
+            ...(LedMatrix.defaultMatrixOptions),
             rows: 32,
             cols: 64,
             chainLength: 2,
@@ -24,7 +24,7 @@ const setupMatrix = () => {
             }),
         },
         {
-            ...(LedMatrix.defaultRuntimeOptions()),
+            ...(LedMatrix.defaultRuntimeOptions),
             gpioSlowdown: 0,
         }
     );
