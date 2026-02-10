@@ -4,36 +4,21 @@ import fetch from 'node-fetch';
 
 import { LedMatrix } from 'rpi-led-matrix';
 
-console.log(LedMatrix.defaultMatrixOptions);
-
-const matrixOptions = {
-    rows: 32,
-    cols: 128,
-    chainLength: 2,
-    parallel: 1,
-    showRefreshRate: false,
-    hardwareMapping: 'regular', // or 'adafruit-hat'
-    pwmbits: 11,
-    brightness: 100,
-    disableHardwarePulsing: false,
-    rowAddressType: 0,
-    multiplexing: 0,
-    luminanceSteps: 255,
-    inverseColors: false,
-    ledRgbSequence: 'RGB',
-    pixelMapperConfig: '',
-    panelType: ''
-};
-
-const runtimeOptions = {
-    gpioSlowdown: 2,
-    daemon: 0, // 0 for Off, 1 for On
-    dropPrivileges: 1,
-    doGpioInit: true
-};
-
 (async () => {
   try {
+    // Configuration for your specific matrix (adjust as needed)
+    const matrixOptions = {
+        ...LedMatrix.defaultMatrixOptions(),
+        rows: 32,
+        cols: 32,
+        chainLength: 1,
+        hardwareMapping: 'regular', // or 'regular'
+    };
+
+    const runtimeOptions = {
+        ...LedMatrix.defaultRuntimeOptions(),
+        gpioSlowdown: 2, // Required for slower Pis
+    };
     
     const matrix = new LedMatrix(matrixOptions, runtimeOptions);
 
