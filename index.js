@@ -87,8 +87,6 @@ const renderArrivalTimes = (trains) => {
 
 
 const start = () => {
-    setupMatrix();
-
     setInterval(() => {
         renderData();
     }, 4000);
