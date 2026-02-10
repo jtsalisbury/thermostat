@@ -11,10 +11,10 @@ const wait = (t) => new Promise(ok => setTimeout(ok, t));
     // Configuration for your specific matrix (adjust as needed)
     const matrixOptions = {
         ...LedMatrix.defaultMatrixOptions(),
-        rows: 32,
-        cols: 128,
+        rows: 128,
+        cols: 32,
         chainLength: 2,
-        hardwareMapping: 'regular', // or 'regular'
+        hardwareMapping: 'classic-pi1', // or 'regular'
     };
 
     const runtimeOptions = {
