@@ -75,13 +75,11 @@ const showNoTrains = () => {
 }
 
 const renderArrivalTimes = (trains) => {
-    console.log(trains[0]);
-
-
     matrix.clear().brightness(100).font(font);
 
-    const i = 0;
+    let i = 0;
     for (let train of trains) {
+
         matrix
             .fgColor(getColor(train))
             .drawText(train.train_type + " - " + train.which_is_in + " min", 0, 5 * i + 1);
