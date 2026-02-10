@@ -13,25 +13,40 @@ const wait = (t) => new Promise(ok => setTimeout(ok, t));
         ...LedMatrix.defaultMatrixOptions(),
         rows: 32,
         cols: 128,
-        chainLength: 1,
+        chainLength: 2,
         hardwareMapping: 'regular', // or 'regular'
     };
 
     const runtimeOptions = {
         ...LedMatrix.defaultRuntimeOptions(),
         gpioSlowdown: 2, // Required for slower Pis
-        disableHardwarePulsing: true
     };
     
     const matrix = new LedMatrix(matrixOptions, runtimeOptions);
     matrix
-        .clear()
-        .brightness(100)
-        .fgColor(0x0000ff)
-        .drawRect(0, 0, matrix.width() - 1, matrix.height() - 1)
-        .fgColor(0xff0000)
-        .drawLine(0, matrix.height() / 2, matrix.width(), matrix.height() / 2)
-        .sync();
+    .clear() // clear the display
+    .brightness(100) // set the panel brightness to 100%
+    .fgColor(0x0000ff) // set the active color to blue
+    .fill() // color the entire diplay blue
+    .fgColor(0xffff00) // set the active color to yellow
+    // draw a yellow circle around the display
+    .drawCircle(
+      matrix.width() / 2,
+      matrix.height() / 2,
+      matrix.width() / 2 - 1
+    )
+    // draw a yellow rectangle
+    .drawRect(
+      matrix.width() / 4,
+      matrix.height() / 4,
+      matrix.width() / 2,
+      matrix.height() / 2
+    )
+    // sets the active color to red
+    .fgColor({ r: 255, g: 0, b: 0 })
+    // draw two diagonal red lines connecting the corners
+    .drawLine(0, 0, matrix.width(), matrix.height())
+    .drawLine(matrix.width() - 1, 0, 0, matrix.height() - 1);
 
         await wait(9999999);
 
