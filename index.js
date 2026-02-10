@@ -82,7 +82,7 @@ const renderArrivalTimes = (trains) => {
 
         matrix
             .fgColor(getColor(train))
-            .drawText(train.train_type + " - " + train.which_is_in + " min", 0, 5 * i + 1);
+            .drawText(train.train_type + " - " + train.which_is_in + " min", 0, (5 * i) + 3);
         
         i++;
             
