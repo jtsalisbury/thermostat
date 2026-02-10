@@ -8,8 +8,8 @@ console.log(LedMatrix.defaultMatrixOptions);
 
 const matrixOptions = {
     rows: 32,
-    cols: 64,
-    chainLength: 1,
+    cols: 128,
+    chainLength: 2,
     parallel: 1,
     showRefreshRate: false,
     hardwareMapping: 'regular', // or 'adafruit-hat'
@@ -35,7 +35,7 @@ const runtimeOptions = {
 (async () => {
   try {
     
-    const matrix = new LedMatrix(matrixOptions, runtimeOptions);
+    const matrix = LedMatrix(matrixOptions, runtimeOptions);
 
     // Set an initial display color
     matrix.Fill(255, 0, 0); // Fills the matrix with Red
